@@ -3,6 +3,7 @@
 Spyder Editor
 朴素贝叶斯 垃圾邮件分类器 
 测试集误分比 = 5%
+转化为log likelihood后 1.6%
 
 """
 import scipy.io as sio 
