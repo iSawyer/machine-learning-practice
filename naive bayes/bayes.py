@@ -15,10 +15,6 @@ from scipy import*
 # 第四行为数据 第一列为label 后面为word-bag index 
 # (i,j) ==> 第i个邮件 第j个单词出现的次数
 
-
-
-
-
 # naive bayes with multinomial event model and Laplace smoothing.
 def bayes_train(matrix,label):
    # tup = preprocess(train_file_name)
@@ -59,9 +55,31 @@ def bayes_train(matrix,label):
             y1_n += n_i[sample]
         else:
             y0_n += n_i[sample]
+    # 计算条件概率  p(xk|y) event model + 拉普拉斯平滑
     pxy_1 = (pxy_1) / (y1_n + n)
     pxy_0 = (pxy_0) / (y0_n + n)
-    # 计算条件概率  p(xk|y) event model + 拉普拉斯平滑
+    # 没有找到python有序容器啊 
+    # top-k 问题用堆 ， 为了简便这里直接排序吧
+    dic = {}
+    
+    for i in range(n):
+        p = log(pxy_1[i]) - log(pxy_0[i])
+        dic[i] = p[0] 
+    
+    dd = sorted(dic.iteritems(),key=lambda x: x[1], reverse = True)
+    #print dd
+    fd = open('../MATRIX.TRAIN')
+    fd.readline()
+    fd.readline()
+    words_bag = fd.readline() 
+    words_bag = words_bag.strip('\n')
+    word_list = words_bag.split(' ')
+    #print dd.keys()
+    for i in range(5):
+        #print l[i]
+        print str(i) + ' ' +  word_list[dd[i][0]]
+        
+                
     return (py_1,py_0,pxy_1,pxy_0)
 
 
@@ -92,7 +110,7 @@ def bayes_test(test_matrix, test_label, train_matrix, train_label):
             error_count += 1.0
     #print error_count + '\n'
     
-    print error_count / m
+    print 'error:' + str(error_count / m)
     
     return 
     
