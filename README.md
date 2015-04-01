@@ -1,4 +1,4 @@
-# spam-classification
+# for fun
 
 bayes：贝叶斯垃圾邮件分类器， 拉普拉斯平滑 + log
 
