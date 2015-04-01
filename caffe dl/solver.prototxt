@@ -1,0 +1,22 @@
+
+# net定义
+net: "./net2.prototxt"
+
+# 迭代次数 = 图像总数 / batches
+test_iter: 17 
+
+test_interval:100 
+
+base_lr: 0.01
+momentum: 0.9
+
+weight_decay: 0.04
+
+lr_policy: "fixed"
+
+display: 1
+
+max_iter: 1000
+snapshot: 1000
+snapshot_prefix: "./"
+solver_mode: CPU

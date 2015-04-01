@@ -1,0 +1,64 @@
+name: "face_detection"
+
+layers{
+  name:"face_detection"
+  top: "data"
+  top: "label"
+  
+  type: MEMORY_DATA
+  memory_data_param{
+    channels: 1
+    height:96
+    width:96
+     batch_size:1783  
+ }
+
+}
+
+layers{
+  name: "hidden_1"
+  type: INNER_PRODUCT
+  bottom:"data"
+  top: "ip1"
+  blobs_lr:1
+  blobs_lr:2
+  inner_product_param{
+  
+    num_output:500
+    weight_filler{
+      type:"xavier"
+    }
+    bias_filler{
+      type:"constant"
+    }
+  }
+}
+
+layers{
+   name: "neron_1"
+   type: RELU
+   bottom:"ip1"
+   top: "ip1"
+}
+
+layers{
+  name:"output"
+  type:INNER_PRODUCT
+  bottom: "ip1"
+  top: "output"
+  inner_product_param{
+    num_output:30 
+    weight_filler{
+      type:"xavier"
+    }
+    bias_filler{
+   
+      type: "constant"
+    }
+
+  }
+
+}
+
+
+
