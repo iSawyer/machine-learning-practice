@@ -263,7 +263,7 @@ def testRBF(k1 = 10):
             test_label[i][0] = 1.0
         
     
-    b,alphas = SMO(train_matrix,train_label,1,0.001,('RBF',k1))
+    b,alphas = SMO(train_matrix,train_label,3,0.01,('RBF',k1))
     
  
     w = calcWs(alphas,train_matrix,train_label)
